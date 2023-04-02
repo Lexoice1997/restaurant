@@ -18,6 +18,11 @@ export class CategoriesService {
   }
 
   async getAllCategories() {
+    const categories = await this.categoriesRepository.find();
+    return categories;
+  }
+
+  async getAllCategoriesWithFood() {
     const categories = await this.categoriesRepository.find({
       relations: { foods: true },
     });

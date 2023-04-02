@@ -9,6 +9,8 @@ export class CategoriesEntity {
   @Column({ unique: true })
   name: string;
 
-  @OneToMany(() => FoodsEntity, (foods) => foods.category)
+  @OneToMany(() => FoodsEntity, (foods) => foods.category, {
+    cascade: ['insert', 'remove', 'update'],
+  })
   foods: FoodsEntity;
 }

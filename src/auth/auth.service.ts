@@ -37,10 +37,17 @@ export class AuthService {
     return this.generateToken(user);
   }
 
+  async check(token: string) {
+    const data = this.jwtService.decode(token);
+    return data;
+  }
+
   private async generateToken(user: UsersEntity) {
     const payload = { phone: user.phone, id: user.id, name: user.name };
     return {
       token: this.jwtService.sign(payload),
+      name: user.name,
+      phone: user.phone,
     };
   }
 

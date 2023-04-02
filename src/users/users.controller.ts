@@ -21,6 +21,11 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get()
+  getByPhone() {
+    return this.usersService.getAllUsers();
+  }
+
   @Put('/:id')
   update(@Param('id') id: string, @Body() userDto: UpdateUserDto) {
     return this.usersService.updateUser(id, userDto);

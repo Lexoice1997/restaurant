@@ -18,7 +18,14 @@ export class UsersService {
   }
 
   async getAllUsers() {
-    const users = await this.usersRepository.find();
+    const users = await this.usersRepository.find({
+      select: {
+        id: true,
+        name: true,
+        phone: true,
+        banned: true,
+      },
+    });
     return users;
   }
 

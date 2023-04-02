@@ -1,5 +1,11 @@
 import { CategoriesEntity } from 'src/categories/entities/categories.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('foods')
 export class FoodsEntity {
@@ -22,5 +28,6 @@ export class FoodsEntity {
   fileId: string;
 
   @ManyToOne(() => CategoriesEntity, (category) => category.foods)
+  @JoinTable({ name: 'categoryId' })
   category: CategoriesEntity;
 }

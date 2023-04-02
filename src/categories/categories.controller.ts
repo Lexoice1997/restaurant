@@ -17,12 +17,19 @@ export class CategoriesController {
 
   @Post()
   create(@Body() categoryDto: CreateCategoryDto) {
+    console.log(categoryDto);
+
     return this.categoriesService.createCategory(categoryDto);
   }
 
   @Get()
   getAll() {
     return this.categoriesService.getAllCategories();
+  }
+
+  @Get('/foods')
+  getAllWithFoods() {
+    return this.categoriesService.getAllCategoriesWithFood();
   }
 
   @Get('/:id')

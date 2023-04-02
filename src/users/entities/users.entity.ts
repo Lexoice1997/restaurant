@@ -10,11 +10,11 @@ export interface User {
 }
 
 @Entity('users')
-export class UsersEntity{
+export class UsersEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
+  @Column()
   phone: string;
 
   @Column()

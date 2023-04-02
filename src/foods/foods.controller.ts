@@ -6,10 +6,12 @@ import {
   Param,
   Post,
   Put,
+  Query,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Express } from 'express';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 import { FoodsService } from './foods.service';
@@ -25,8 +27,13 @@ export class FoodsController {
   }
 
   @Get()
-  getAll() {
-    return this.foodsService.getAllFoods();
+  getAll(@Query() query) {
+    return this.foodsService.getAllFoods(query);
+  }
+
+  @Get('/search')
+  search(@Query() query) {
+    return this.foodsService.searchFoods(query);
   }
 
   @Get('/:id')
@@ -36,11 +43,12 @@ export class FoodsController {
 
   @Put('/:id')
   update(@Param('id') id: string, @Body() foodDto: UpdateFoodDto) {
+    console.log(foodDto.categoryId);
     return this.foodsService.updateFood(id, foodDto);
   }
 
   @Delete('/:id')
-  delete(@Param('id') id: string) {
-    return this.foodsService.deleteFood(id);
+  delete(@Param('id') id: string, @Body() fileId: string) {
+    return this.foodsService.deleteFood(id, fileId);
   }
 }
